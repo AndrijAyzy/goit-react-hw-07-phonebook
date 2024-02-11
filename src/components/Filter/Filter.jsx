@@ -6,7 +6,7 @@ export const Filter = () => {
   const dispatch = useDispatch();
   return (
     <Label>
-      Find contact by name
+      Filter
       <InputFilter
         type="text"
         name="text"

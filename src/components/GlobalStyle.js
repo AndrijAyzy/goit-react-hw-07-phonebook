@@ -5,6 +5,9 @@ export const GlobalStyle = createGlobalStyle`
 
 body {
   margin: 0;
+  background: #ebdf07;
+  justify-content: center;
+  display: inline-block;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -15,6 +18,7 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+    
 }
 
 h1
@@ -33,6 +37,8 @@ img {
   display: block;
   max-width: 100%;
   object-fit: cover;
+  text-align: center;
+  justify-content: center;
 }
 
 button {
@@ -46,6 +52,8 @@ button {
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   background-color: #fdfdfe;
+  text-align: center;
+  justify-content: center;
 }
 
 button:hover {

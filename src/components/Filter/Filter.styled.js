@@ -4,12 +4,17 @@ export const Label = styled.label`
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 20px;
+  font-size: 18px;
+  text-alight: left;
+  
 `;
 
 export const InputFilter = styled.input`
-  margin-bottom: 20px;
+margin: 0px;
+margin-left: 55px;  
+margin-bottom: 20px;
   padding: 4px;
-  width: 180px;
-  box-shadow: inset 2px 2px rgba(0, 0, 0, 0.2);
+  width: 200px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
 `;

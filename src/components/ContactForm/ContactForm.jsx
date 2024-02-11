@@ -54,8 +54,8 @@ export const ContactForm = () => {
         </Label>
 
         <Label>
-          Phone Number
-          <StyledField name="number" placeholder="XXX-XX-XX" />
+          Number
+          <StyledField name="number" placeholder="" />
           <StyledError name="number" component="div" />
         </Label>
 
