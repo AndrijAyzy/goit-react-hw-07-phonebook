@@ -1,18 +1,19 @@
-import { Dna } from 'react-loader-spinner';
+import { Watch } from 'react-loader-spinner';
+import { StyledWrapper } from './Loader.styled';
 
-export const Loader = ({ isLoading }) => {
+export const Loader = () => {
   return (
-    <Dna
-      visible={isLoading}
-      height="80"
-      width="80"
-      ariaLabel="dna-loading"
-      wrapperStyle={{
-        display: 'block',
-        marginTop: '5px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-      }}
-    />
+    <StyledWrapper>
+      <Watch
+        height="80"
+        width="80"
+        radius="48"
+        color="#4fa94d"
+        ariaLabel="watch-loading"
+        wrapperStyle={{}}
+        wrapperClassName=""
+        visible={true}
+      />
+    </StyledWrapper>
   );
 };

@@ -1,98 +1,66 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/selectors';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { FaUserPlus, FaUser } from 'react-icons/fa';
-import { BsFillTelephoneFill } from 'react-icons/bs';
 import {
-  FormField,
-  Form,
-  ErrorMessage,
-  FormBtnAdd,
-  LabelWrapper,
-  FieldInput,
-} from './ContactForm.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import {
-  notificationMassege,
-  notificationOptions,
-} from 'components/Notification/Notification';
-import { toast } from 'react-toastify';
-import { addContact } from 'redux/operations';
+  Label,
+  StyledForm,
+  StyledField,
+  Button,
+  StyledError,
+} from './ContactForm.staled';
 
-// валідація полів форми
-const ContactSchema = Yup.object().shape({
+const schema = Yup.object().shape({
   name: Yup.string()
+    .required('Name is required')
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      'Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz... '
-    )
-    .required(),
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+    ),
   number: Yup.string()
+    .required('Phone number is required')
     .matches(
-      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      /\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}/,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
-    )
-    .required(),
+    ),
 });
 
 export const ContactForm = () => {
-  // Для того щоб сповістити сторінку про те, що в інтерфейсі відбулася якась подія, необхідно відправити екшен. Для цього у бібліотеці React Redux є хук useDispatch(), який повертає посилання на функцію надсилання екшенів dispatch з об'єкта створеного нами раніше стора Redux.
-  const dispatch = useDispatch();
-  // Отримуємо необхідну частину стану зі стору
   const contacts = useSelector(selectContacts);
-
-  // console.log(selectContacts);
+  const dispatch = useDispatch();
 
   return (
     <Formik
-      // дивись документацію
-      initialValues={{ name: '', number: '' }}
-      validationSchema={ContactSchema}
+      initialValues={{
+        name: '',
+        number: '',
+      }}
+      validationSchema={schema}
       onSubmit={(values, actions) => {
-        // перевірка на існуюче ім'я контакту
-        if (
-          contacts.some(
-            contact =>
-              contact.name.toLocaleLowerCase() ===
-              values.name.toLocaleLowerCase()
-          )
-        ) {
-          // повідомлення
-          toast.error(
-            `${values.name} ${notificationMassege}`,
-            notificationOptions
-          );
-          return;
-        }
-        dispatch(addContact({ ...values }));
-        // console.log(values);
+        contacts.find(
+          contact => contact.name.toLowerCase() === values.name.toLowerCase()
+        )
+          ? alert(`${values.name} is already in contacts`)
+          : dispatch(addContact(values));
         actions.resetForm();
       }}
     >
-      <Form>
-        <FormField>
-          <LabelWrapper>
-            <FaUser size="16" />
-            Name
-          </LabelWrapper>
-          <FieldInput name="name" />
-          <ErrorMessage name="name" component="div" />
-        </FormField>
+      <StyledForm>
+        <Label>
+          Name
+          <StyledField name="name" />
+          <StyledError name="name" component="div" />
+        </Label>
 
-        <FormField>
-          <LabelWrapper>
-            <BsFillTelephoneFill size="16" />
-            Number
-          </LabelWrapper>
-          <FieldInput name="number" />
-          <ErrorMessage name="number" component="div" />
-        </FormField>
+        <Label>
+          Phone Number
+          <StyledField name="number" placeholder="XXX-XX-XX" />
+          <StyledError name="number" component="div" />
+        </Label>
 
-        <FormBtnAdd type="submit">
-          <FaUserPlus size="16" />
-          Add contact
-        </FormBtnAdd>
-      </Form>
+        <Button type="submit">Add contact</Button>
+      </StyledForm>
     </Formik>
   );
 };

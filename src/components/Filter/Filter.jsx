@@ -1,29 +1,17 @@
-import { MdPersonSearch } from 'react-icons/md';
-import { Input, SearchField } from './Filter.styled';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectFilter } from 'redux/selectors';
-import { setFilter } from 'redux/filterSlice';
+import { useDispatch } from 'react-redux';
+import { getVisibleContacts } from 'redux/filterSlice';
+import { InputFilter, Label } from './Filter.styled';
 
 export const Filter = () => {
-  // Отримуємо необхідну частину стану зі стору
-  const filterValue = useSelector(selectFilter);
-  // Для того щоб сповістити сторінку про те, що в інтерфейсі відбулася якась подія, необхідно відправити екшен.
   const dispatch = useDispatch();
-
-  const changeFilter = e => {
-    dispatch(setFilter(e.currentTarget.value));
-  };
-
   return (
-    <SearchField>
-      <MdPersonSearch size="22" />
-      <Input
+    <Label>
+      Find contact by name
+      <InputFilter
         type="text"
-        name="filter"
-        value={filterValue}
-        onChange={changeFilter}
-        placeholder="Find contacts by name"
+        name="text"
+        onChange={evt => dispatch(getVisibleContacts(evt.target.value))}
       />
-    </SearchField>
+    </Label>
   );
 };
