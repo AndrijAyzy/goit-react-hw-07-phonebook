@@ -1,88 +1,70 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
+import {
+  Form as FormikForm,
+  ErrorMessage as FormikErrorMessage,
+  Field,
+} from 'formik';
 
-export const Form = styled.form`
+export const Form = styled(FormikForm)`
+  width: 390px;
+  padding: 20px;
+  margin-bottom: 30px;
+  border: 1px solid ${props => props.theme.colors.accentDark};
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-width: 400px;
-  padding: 25px;
-  padding-bottom: 25px;
-  border-radius: 5px;
-  margin-bottom: 35px;
-  box-shadow: 1px 7px 14px 0px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-  background-color: white;
-`;
-export const Title = styled.h2`
-  font-size: 30px;
-  font-weight: 600;
-  text-transform: uppercase;
+  gap: 15px;
+  box-shadow: -1px -1px 5px #fff, 1px 1px 5px ${p => p.theme.colors.accentDark};
 `;
 
-
-export const Input = styled.input`
-  display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  padding: 5px;
-
-  border: 0;
-  border-bottom: 2px solid gray;
-  outline: 0;
-  font-size: 1.3rem;
-  color: black;
-  padding: 7px 0;
-  background: transparent;
-
-`;
-
-export const AddButton = styled.button`
+export const FormField = styled.label`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 30px;
-  cursor: pointer;
-  margin-top: 15px;
-  color: rgb(255, 255, 255);
-  border-radius: 5px;
-  font-family: Lato, sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  transition: all 0.3s ease 0s;
-  box-shadow: rgba(255, 255, 255, 0.5) 2px 2px 2px 0px inset,
-    rgba(0, 0, 0, 0.1) 7px 7px 20px 0px, rgba(0, 0, 0, 0.1) 4px 4px 5px 0px;
-  outline: none;
-  position: relative;
-  background: #0fc1dd;
+  flex-direction: column;
+`;
+
+export const FieldInput = styled(Field)`
+  padding: 10px;
   border: none;
-  z-index: 1;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 3px ${props => props.theme.colors.accentLight},
+    inset -1px -1px 5px ${props => props.theme.colors.accentLight};
+`;
 
-  &:after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 100%;
-    top: 0;
-    right: 0;
-    z-index: -1;
-    background-color: #2ba2cd;
-    border-radius: 5px;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-  }
-  &:hover {
+export const LabelWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-left: 8px;
+  margin-bottom: 5px;
+`;
+
+export const ErrorMessage = styled(FormikErrorMessage)`
+  font-size: 12px;
+  font-style: italic;
+  color: ${props => props.theme.colors.error};
+`;
+
+export const FormBtnAdd = styled.button`
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  border: none;
+  background-color: ${p => p.theme.colors.accentLight};
+  transition: all 0.2s ease-in-out;
+  :hover,
+  :focus {
+    background-color: ${p => p.theme.colors.accentDark};
     color: #fff;
-  }
-
-  &:hover:after {
-    left: 0;
-    width: 100%;
-  }
-  > span {
-    margin-right: 10px;
-    font-size: 18px;
+    box-shadow: -2px -2px 5px #fff,
+      2px 2px 5px ${p => p.theme.colors.accentDark};
+    svg {
+      fill: #fff;
+      stroke: #fff;
+    }
   }
 `;
